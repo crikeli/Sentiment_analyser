@@ -6,6 +6,7 @@ from tweepy import OAuthHandler
 # Module that carries out sentiment analysis
 from textblob import TextBlob
 
+
 # Declared a twitter class that is the "control-center" of the app.
 class Twitter(object):
     # object instance initialized parametrized by itself, a query and a couple of booleans describing tweet attributes

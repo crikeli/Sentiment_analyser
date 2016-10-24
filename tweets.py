@@ -1,8 +1,3 @@
-# consumer_key = "qc3xNBhXKoeuaNyOdr1FDWwzZ"
-# consumer_secret = "HW6z7h9DYFFJZmZTrQfcGkMONa5k5X1HYmE2Qv0JuOgCIBXRBg"
-# access_key = "4900371912-CPNC1CIg0uDKylFEPClYJqw7fKLqoyfZ2MczCjl"
-# access_secret = "7n8dkQi3NBtJFm4bEgo5sftaNFv5IRkts1R7gpjV2UbOT"
-
 import os
 import re
 # Module that interfaces with the twitter API

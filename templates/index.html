@@ -1,1 +1,79 @@
-<h1>Server Runs and Auth Successful!</h1>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tweet Sentiment Analyser</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+	<div class='container-fluid' style="text-align:center">
+		<h1>Twitter Sentiment Analyzer</h1>
+		<div id="search_box" class="container-fluid">
+			<input type="text" id="query">
+			<button id="search" style="color:black">Search</button>
+			<!-- <button id="getcsv" style="color:black">Download CSV File</button> -->
+			<div id="loading">LOADING...</div>
+			<div id="tweets" style="text-align: left"></div>
+		</div>
+	</div>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+  <!-- For some reason, my script.js file is not being read -->
+  <!-- <script type="text/javascript" src="script.js"></script> -->
+
+  <!-- That is why, I am doing an in-line version -->
+  <script type="text/javascript">
+  var current_data;
+
+  // Writing the function that dictates the color of the text based on the sentiment.
+  function sentiment_to_color(sentiment){
+     if(sentiment == 'Positive') return 'green';
+     else if(sentiment == 'Negative') return 'red';
+    //  For neutral tweets
+     else return 'orange';
+  }
+
+  // Tweets are loaded by this function and here, the connection with the python script occurs where we specified the url.
+  function load_tweets(querystring){
+    // Each query is an ajax call(no page refresh occurs)
+     $.ajax({
+         url: 'tweets',
+         data: {'query': querystring, 'retweets_only': 'false', 'with_sentiment': 'true'},
+        //  All the data is in a json format
+         dataType: 'json',
+         type: 'GET',
+         success: function(data) {
+             current_data = data['data'];
+             var tweets = data['data'];
+            //  checking whether or not tweets are retrieved.
+            //  console.log(tweets)
+             var container = $('#tweets');
+             var contents = '';
+             for(i = 0; i < tweets.length; i++)
+               contents += '<p style="color:'+ sentiment_to_color(tweets[i].sentiment) +'">' + tweets[i].text +'</p>';
+             container.html(contents);
+            //  console.log("We UP IN DIS")
+             $('#query').val(querystring);
+             $('#loading').html("Number of tweets retrieved about "+ querystring +": " + data['count']);
+         }
+     });
+  }
+
+  // What happens once the document is loaded.
+  $(document).ready(function(){
+     load_tweets('Election 2016');
+   });
+
+  // What happens upon clicking search
+  $('#search').click(function(){
+     $('#loading').html('LOADING...');
+     $('#tweets').html('');
+     load_tweets($('#query').val());
+  });
+
+  </script>
+</body>
+</html>

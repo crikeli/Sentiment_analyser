@@ -6,10 +6,10 @@ from tweepy import OAuthHandler
 # Module that carries out sentiment analysis
 from textblob import TextBlob
 
-os.environ['CONSKEY'] = "XXXXXXX"
-os.environ['CONSSECRET'] = "XXXXXXX"
-os.environ['ACCTOKEN'] = "XXXXXXX"
-os.environ['ACCSECRET'] = "XXXXXXX"
+os.environ['CONSKEY'] = "XXXXXXXXXX"
+os.environ['CONSSECRET'] = "XXXXXXXXXX"
+os.environ['ACCTOKEN'] = "XXXXXXXXXX"
+os.environ['ACCSECRET'] = "XXXXXXXXXX"
 
 # Declared a twitter class that is the "control-center" of the app.
 class Twitter(object):
@@ -45,20 +45,33 @@ class Twitter(object):
     def set_with_sentiment(self, with_sentiment='false'):
         self.with_sentiment = with_sentiment
 
-    # # Remove tweet fluff(at mentions, links) using regex.
+
+    # def remove_fluff(self, tweet):
+    #     tweet = re.sub("https?\:\/\/", "", tweet)   #links
+    #     tweet = re.sub("#\S+", "", tweet)           #hashtags
+    #     tweet = re.sub("\.?@", "", tweet)           #at mentions
+    #     tweet = re.sub("RT.+", "", tweet)           #Retweets
+    #     tweet = re.sub("Video\:", "", tweet)        #Videos
+    #     tweet = re.sub("\n", "", tweet)             #new lines
+    #     tweet = re.sub("^\.\s.", "", tweet)         #leading whitespace
+    #     tweet = re.sub("\s+", " ", tweet)           #extra whitespace
+    #     tweet = re.sub("&amp;", "and", tweet)       #encoded ampersands
+    #     return tweet
+
+    # Remove tweet fluff(at mentions, links) using regex.
     def remove_fluff(self, tweet):
-        return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
+        return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)|(\.?@)|(https?\:\/\/)|(\n)", " ", tweet).split())
 
     def get_sentiment(self, tweet):
         # We access the TextBlob module to analyze individual tweets
         analysis = TextBlob(self.remove_fluff(tweet))
         # Determine the polarity of the tweet(Whether it is positive or negative)
         if analysis.sentiment.polarity > 0:
-            return 'positive'
+            return 'Positive'
         elif analysis.sentiment.polarity == 0:
-            return 'neutral'
+            return 'Neutral'
         else:
-            return 'negative'
+            return 'Negative'
 
     def get_tweets(self):
         tweets = []

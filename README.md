@@ -9,8 +9,11 @@ A simple application that gives a sense of various emotions in tweets
 - Save Twitter Credentials and declare them in twiter.py where I have labelled "XXXXXXXXXX"
     ```python
     os.environ['CONSKEY'] = "XXXXXXXXXX"
+    
     os.environ['CONSSECRET'] = "XXXXXXXXXX"
+    
     os.environ['ACCTOKEN'] = "XXXXXXXXXX"
+    
     os.environ['ACCSECRET'] = "XXXXXXXXXX"
     ```
 - Run the server. `python analyzer.py`

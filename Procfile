@@ -1,1 +1,1 @@
-worker: python analyzer.py
+web: python analyzer.py

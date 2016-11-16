@@ -6,11 +6,6 @@ from tweepy import OAuthHandler
 # Module that carries out sentiment analysis
 from textblob import TextBlob
 
-os.environ['CONSKEY'] = "qc3xNBhXKoeuaNyOdr1FDWwzZ"
-os.environ['CONSSECRET'] = "HW6z7h9DYFFJZmZTrQfcGkMONa5k5X1HYmE2Qv0JuOgCIBXRBg"
-os.environ['ACCTOKEN'] = "4900371912-CPNC1CIg0uDKylFEPClYJqw7fKLqoyfZ2MczCjl"
-os.environ['ACCSECRET'] = "7n8dkQi3NBtJFm4bEgo5sftaNFv5IRkts1R7gpjV2UbOT"
-
 # Declared a twitter class that is the "control-center" of the app.
 class Twitter(object):
     # object instance initialized parametrized by itself, a query and a couple of booleans describing tweet attributes

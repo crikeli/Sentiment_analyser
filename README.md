@@ -5,7 +5,7 @@ A simple application that gives a sense of various emotions in tweets
 
 - Create a virtualenv. `virtualenv venv`
 - Activate venv. `source venv/bin/activate`
-- Install the requirements. `pip install -r req.txt`
+- Install the requirements. `pip install -r requirements.txt`
 - Save Twitter Credentials and declare them in twiter.py where I have labelled "XXXXXXXXXX"
     ```python
     os.environ['CONSKEY'] = "XXXXXXXXXX"
